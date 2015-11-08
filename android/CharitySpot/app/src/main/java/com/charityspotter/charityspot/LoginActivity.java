@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private Intent goActivity;
+    private Intent takePictureActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(goActivity);
             }
         });
+
+        takePictureActivity = new Intent(this,ImageChooserActivity.class);
+        Button mTakePictureButton = (Button) findViewById(R.id.take_picture_button);
+        mTakePictureButton.setOnClickListener((new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(takePictureActivity);
+            }
+        }));
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);

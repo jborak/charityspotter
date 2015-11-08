@@ -8,6 +8,9 @@ function searchItems(event) {
   if (typeof input == "undefined" || input === null) {
     return;
   }
+  if (input.length == 0) {
+    return;
+  }
 
   var xhr =  new XMLHttpRequest();
   xhr.onreadystatechange = function() {

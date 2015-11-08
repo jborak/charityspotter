@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- USE_CREDENTIALS is necessary for Google+ login -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -41,6 +43,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.charityspotter.charityspot.ItemListActivity" />
         </activity>
+        <activity
+            android:name=".ImageChooserActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
