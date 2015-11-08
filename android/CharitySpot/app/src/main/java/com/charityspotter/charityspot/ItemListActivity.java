@@ -17,6 +17,11 @@ import android.widget.TextView;
 
 
 import com.charityspotter.charityspot.dummy.DummyContent;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.GenericTypeIndicator;
+import com.firebase.client.ValueEventListener;
 
 import java.util.List;
 
@@ -30,6 +35,13 @@ import java.util.List;
  */
 public class ItemListActivity extends AppCompatActivity {
 
+    public static final String TAG = ItemListActivity.class.getSimpleName();
+    private static final String FIREBASE = "https://charitysandbox.firebaseio.com/items";
+    // The Firebase client
+    private Firebase mFirebaseRef;
+
+    View recyclerView;
+    SimpleItemRecyclerViewAdapter mAdapter;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -40,6 +52,48 @@ public class ItemListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
+
+        // Initialize Firebase
+        mFirebaseRef = new Firebase(FIREBASE);
+
+        mFirebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                System.out.println("Firebase entry: " + snapshot.getValue());
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    System.out.println("foo:"+ postSnapshot);
+                    String temp_url = (String) postSnapshot.child("url").getValue();
+                    System.out.println("url:" + temp_url);
+                    Long temp_uid = (Long) postSnapshot.child("uid").getValue();
+                    System.out.println("uid:" + temp_uid);
+                    Long temp_created = (Long) postSnapshot.child("created").getValue();
+                    System.out.println("created:" + temp_created);
+                    GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+//                    String temp_t = (String) postSnapshot.g
+//                    System.out.println("tags:" + temp_t);
+                    List<String> temp_tags = postSnapshot.child("tags").getValue(t);
+                    if(temp_tags != null) {
+                        for (String e : temp_tags)
+                            System.out.println("array:" + e);
+                    } else {
+                            System.out.println("array is null");
+                    }
+
+                    DummyContent.addItem(temp_created.toString(),temp_uid.toString(),temp_url,temp_tags);
+//                    DummyContent.DummyItem tempItem = new DummyContent.DummyItem(temp_created.toString(), temp_uid.toString(),temp_url,temp_tags);
+//                    ImageStore.Item entry = postSnapshot.getValue(ImageStore.Item.class);
+//                    System.out.println("line:" + entry.getUrl());
+//                    DummyContent.DummyItem newItem = new DummyContent.DummyItem(postSnapshot.
+//                    System.out.println(entry.getUid() + " - " + entry.getUrl());
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,7 +108,7 @@ public class ItemListActivity extends AppCompatActivity {
             }
         });
 
-        View recyclerView = findViewById(R.id.item_list);
+        recyclerView = findViewById(R.id.item_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
@@ -68,7 +122,8 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        mAdapter = new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS);
+        recyclerView.setAdapter(mAdapter);
     }
 
     public class SimpleItemRecyclerViewAdapter
@@ -90,15 +145,15 @@ public class ItemListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mIdView.setText(mValues.get(position).getId());
+            holder.mContentView.setText(mValues.get(position).getUrl());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        arguments.putString(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.getUrl());
                         ItemDetailFragment fragment = new ItemDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -107,7 +162,7 @@ public class ItemListActivity extends AppCompatActivity {
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, ItemDetailActivity.class);
-                        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
 
                         context.startActivity(intent);
                     }

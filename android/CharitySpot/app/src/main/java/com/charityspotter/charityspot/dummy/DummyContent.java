@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Helper class for providing sample content for user interfaces created by
  * Android template wizards.
- * <p>
+ * <p/>
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class DummyContent {
@@ -25,21 +25,20 @@ public class DummyContent {
 
     private static final int COUNT = 25;
 
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
-    }
 
-    private static void addItem(DummyItem item) {
+    public static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    public static void addItem(String created, String uid, String url, List<String>tags) {
+        DummyItem aItem = new DummyItem(created,uid,url,tags);
+        ITEMS.add(aItem);
+        ITEM_MAP.put(aItem.id, aItem);
     }
+//    private static DummyItem createDummyItem(int position) {
+//        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+//    }
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
@@ -54,19 +53,47 @@ public class DummyContent {
      * A dummy item representing a piece of content.
      */
     public static class DummyItem {
-        public final String id;
-        public final String content;
-        public final String details;
+        private String id;
+        private String created;
+        private String uid;
+        private String url;
+        private List<String> tags;
 
-        public DummyItem(String id, String content, String details) {
-            this.id = id;
-            this.content = content;
-            this.details = details;
+//        public DummyItem() {
+//            // empty default constructor for Firebase
+//        }
+        public DummyItem(String created,String uid, String url, List<String> tags) {
+
+            this.id = created;
+            this.created = created;
+            this.uid = uid;
+            this.url = url;
+            this.tags = tags;
         }
 
         @Override
         public String toString() {
-            return content;
+            return created;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public List<String> getTags() {
+            return tags;
         }
     }
 }
