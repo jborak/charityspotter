@@ -2,9 +2,43 @@
 <html lang="en">
 
 <head>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- 1. Include Firebase JS Client -->
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/js/simple-login/1.6.4/firebase-simple-login.js"></script>
+
+
+
+    <script type="text/javascript">
+
+var myRef = new Firebase("https://charitysandbox.firebaseio.com");
+var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
+  if (error) {
+    // an error occurred while attempting login
+    console.log(error);
+  } else if (user) {
+    // user authenticated with Firebase
+    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
+  } else {
+    // user is logged out
+    consol.log("not logged in");
+  }
+});
+
+    $(function(){
+        $("fblogin").click(function(){
+            auth.login('facebook', {
+                rememberMe: true,
+                scope: 'email, user_likes'
+            });
+        });
+    });
+    </script>
+
+
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,16 +106,6 @@
         <!-- /.container-fluid -->
     </nav>
 
-<script>
-var ref = new Firebase("https://charityspotter.com");
-ref.authWithOAuthPopup("facebook", function(error, authData) {
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-  }
-});
-</script>
     <div class="collecter-header">
         <div>
             <h1>Collector</h1>
@@ -113,7 +137,7 @@ ref.authWithOAuthPopup("facebook", function(error, authData) {
                 </ul>
             </div>
         </div>
-
+<div class="container" style="margin: 100px"><a href="#" id="fblogin">FB Login</a></div>
         <!-- Text under buttons -->
         <div class="row">
             <div class="col-lg-6 subheader">
