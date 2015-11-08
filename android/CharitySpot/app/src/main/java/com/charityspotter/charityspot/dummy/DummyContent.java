@@ -49,6 +49,11 @@ public class DummyContent {
         return builder.toString();
     }
 
+    public static void clearContent() {
+        ITEMS.clear();
+        ITEM_MAP.clear();
+    }
+
     /**
      * A dummy item representing a piece of content.
      */

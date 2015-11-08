@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
 import com.kbeanie.imagechooser.api.ImageChooserListener;
@@ -21,6 +22,10 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by morrisonchang on 11/8/15.
@@ -49,6 +54,10 @@ public class ImageChooserActivity extends Activity implements ImageChooserListen
     private String originalFilePath;
     private String thumbnailFilePath;
     private String thumbnailSmallFilePath;
+    // The Firebase client
+    private Firebase mFirebaseRef;
+    private static final String FIREBASE = "https://charitysandbox.firebaseio.com/items";
+
     ImageTagger itag;
     String[] tagResults;
 
@@ -57,6 +66,9 @@ public class ImageChooserActivity extends Activity implements ImageChooserListen
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Activity Created");
         setContentView(R.layout.activity_image_chooser);
+
+        // Initialize Firebase
+        mFirebaseRef = new Firebase(FIREBASE);
 
         itag = new ImageTagger();
 
@@ -162,12 +174,30 @@ public class ImageChooserActivity extends Activity implements ImageChooserListen
                         }
                     }.start();
 
+
+
                     StringBuffer outSb = new StringBuffer("Tags: ");
+                    long unixTime = System.currentTimeMillis() / 1000L;
                     if(tagResults != null) {
+                        // push to firebase
+                        Firebase newPostRef = mFirebaseRef.push();
+                        // Add some data to the new location
+                        HashMap<String, Object> post1 = new HashMap<String, Object>();
+
+                        List<String> tagsToSend = new ArrayList<String>();
                         for (String e : tagResults) {
                             outSb.append("'" + e + "' ");
+                            tagsToSend.add(e);
                             Log.i(TAG, "Tag entry:" + e);
                         }
+
+                        post1.put("url","/demo/unknown.jpg");
+                        String ud = new Long(java.util.UUID.randomUUID().getLeastSignificantBits()).toString();
+                        post1.put("uid",new Long(unixTime).toString());
+                        post1.put("created",unixTime);
+                        post1.put("tags",tagsToSend);
+
+                        newPostRef.setValue(post1);
                     } else {
                         outSb = new StringBuffer("NO TAGS");
                         Log.i(TAG,"NO TAGS");

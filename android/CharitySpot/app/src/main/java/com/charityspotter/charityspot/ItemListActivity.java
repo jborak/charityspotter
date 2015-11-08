@@ -60,11 +60,12 @@ public class ItemListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 System.out.println("Firebase entry: " + snapshot.getValue());
+                DummyContent.clearContent();
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     System.out.println("foo:"+ postSnapshot);
                     String temp_url = (String) postSnapshot.child("url").getValue();
                     System.out.println("url:" + temp_url);
-                    Long temp_uid = (Long) postSnapshot.child("uid").getValue();
+                    String temp_uid = (String) postSnapshot.child("uid").getValue();
                     System.out.println("uid:" + temp_uid);
                     Long temp_created = (Long) postSnapshot.child("created").getValue();
                     System.out.println("created:" + temp_created);
