@@ -75,14 +75,23 @@ form a {
     border-radius: 2.0px;
 }
 
-#results-grid-holder {
-    border-radius: 2px;
-    border-color: #eb3812
-}
-
 .results-container {
     margin: 10px;
     padding: 5px;
+}
+
+#search-summary {
+    color: #787878;
+}
+
+#search-summary > a {
+    color: #eb3812;
+}
+
+#result-count {
+    color: #787878;
+    font-size: 0.8em;
+    text-align: center;
 }
 
 .result-box {
@@ -97,6 +106,7 @@ form a {
 .intra-box {
     background-color: white;
     margin: 4px;
+    padding: 4px;
 }
 
 .intra-box p {

@@ -95,7 +95,14 @@
 
         <div class='results-container'>
 
-            <div class="bs-docs-grid" id="results-grid-holder">
+            <div class="bs-docs-grid">
+                <!-- Search summary -->
+                <div class="row">
+                    <p id='search-summary'>Results for: <a>Cool</a></p>
+                    <p id='result-count'>Displaying 20 out of 35 items found</p>
+                </div>
+
+                <!-- Result grid -->
                 <div class="row">
                     <div class="col-md-3 result-box">
                         <div class='intra-box'>
@@ -238,9 +245,12 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Display more -->
                 <div class="row">
                     <div class="col-md-12" id="more"><p>Get more items</p></div>
                 </div>
+
               </div>
           </div>
 
