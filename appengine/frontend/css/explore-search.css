@@ -1,0 +1,138 @@
+/*!
+ * Start Bootstrap - Explore/Search Page Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-weight: 700;
+}
+
+.topnav {
+    font-size: 14px; 
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.collecter-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 10px;
+    text-align: center;
+    color: #F8F8F8;
+    background: url(../img/header.jpg) no-repeat center center;
+}
+
+.split {
+    padding: 50px 10px 50px 10px;
+    height: 450px;
+    text-align: center;
+}
+
+.explore {
+    background: url(../img/explore.jpg) no-repeat center center;
+    background-size: cover;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.explore:hover {
+    opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+
+.search {
+    background: url(../img/search.jpg) no-repeat center center;
+    background-size: cover;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+.search:hover {
+    opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+
+.btn-collector {
+    border-color: #fff;
+    color: #F8F8F8;
+    background-color: #eb3812;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+    opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+.btn-collector:hover,
+.btn-collector:focus,
+.btn-collector.focus,
+.btn-collector:active,
+.btn-collector.active,
+.open > .dropdown-toggle.btn-collector {
+    border-color: #ededed;
+    color: #f2f2f2;
+    background-color: #222;
+}
+
+.btn-collector:active,
+.btn-collector.active,
+.open > .dropdown-toggle.btn-collector {
+    background-image: none;
+}
+
+.btn-collector.disabled,
+.btn-collector[disabled],
+fieldset[disabled] .btn-collector,
+.btn-collector.disabled:hover,
+.btn-collector[disabled]:hover,
+fieldset[disabled] .btn-collector:hover,
+.btn-collector.disabled:focus,
+.btn-collector[disabled]:focus,
+fieldset[disabled] .btn-collector:focus,
+.btn-collector.disabled.focus,
+.btn-collector[disabled].focus,
+fieldset[disabled] .btn-collector.focus,
+.btn-collector.disabled:active,
+.btn-collector[disabled]:active,
+fieldset[disabled] .btn-collector:active,
+.btn-collector.disabled.active,
+.btn-collector[disabled].active,
+fieldset[disabled] .btn-collector.active {
+    border-color: #fff;
+    background-color: #fff;
+}
+
+.btn-collector .badge {
+    color: #fff;
+    background-color: #222;
+}
+
+
+
+.subheader {
+    padding: 20px 10px 20px 10px;
+    height: 100px;
+    text-align: center;
+    color: #777;
+}
+
+
+
