@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 1. Include Firebase JS Client -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,7 +72,16 @@
         <!-- /.container-fluid -->
     </nav>
 
-
+<script>
+var ref = new Firebase("https://charityspotter.com");
+ref.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+  }
+});
+</script>
     <div class="collecter-header">
         <div>
             <h1>Collector</h1>
