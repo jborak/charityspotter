@@ -16,12 +16,10 @@ import (
 )
 
 func init() {
-  // Initialize globals
-  firebase = &http.Client{}
-
   // Setup URI functions
-  http.HandleFunc("/api/hello/", helloWorld)
+  http.HandleFunc("/api/hello/", hello)
   http.HandleFunc("/api/index/", updateAndIndex)
+  http.HandleFunc("/api/search/", searchIndex)
   http.HandleFunc("/api/debug/", debugIndex)
 }
 
@@ -44,35 +42,22 @@ type LastUpdate struct {
 }
 
 type ImageDoc struct {
-  // ID      string
-  Data    string
-  URL     string
-  Created time.Time
+  // ID      string    `json:""`
+  Data    string    `json:"data"`
+  URL     string    `json:"url"`
+  Created time.Time `json:"created"`
+}
+
+func (this *ImageDoc) String() (string) {
+  return fmt.Sprintf("Data: %s, URL: %s", this.Data, this.URL)
 }
 
 ////
-// Handlers
+// API
 ////
-func helloWorld(w http.ResponseWriter, r *http.Request) {
+func hello(w http.ResponseWriter, r *http.Request) {
   fmt.Fprint(w, "Hello, world!")
 }
-
-////
-// Firebase funcs
-////
-const (
-  // Firebase URLs
-  FirebaseURL string = "https://charitysandbox.firebaseio.com"
-  ItemsPath   string = "/items.json"  // GET
-  UpdatePath  string = "/update.json" // PUT
-
-  // AppEngine constants
-  ImageIndex string = "ImageIndex"
-)
-
-var (
-  firebase *http.Client
-)
 
 func debugIndex(w http.ResponseWriter, r *http.Request) {
   context := appengine.NewContext(r)
@@ -81,22 +66,27 @@ func debugIndex(w http.ResponseWriter, r *http.Request) {
   index, _ := search.Open(ImageIndex)
   num := 0
   for t := index.List(context, nil); ; {
-    var doc ImageDoc
-    _, err := t.Next(&doc)
+    doc := &ImageDoc{}
+    _, err := t.Next(doc)
     if err == search.Done {
       break
-    } else if err != nil {
+    }
+    if err != nil {
+      fmt.Fprintf(w, err.Error())
       break
     }
+    fmt.Fprintf(w, doc.String())
     num++
   }
 
   fmt.Fprintf(w, "%d documents in index", num)
+
+  updated := getLastUpdated(context)
+  fmt.Fprintf(w, "%d last updated", updated)
 }
 
 func updateAndIndex(w http.ResponseWriter, r *http.Request) {
   context := appengine.NewContext(r)
-
   images := getLatestImages(context)
 
   // Fetch document index.
@@ -127,8 +117,74 @@ func updateAndIndex(w http.ResponseWriter, r *http.Request) {
   // Set new last updated time for next iteration.
   if len(images) > 0 {
     setLastUpdate(context, images[len(images) - 1].Created) 
+  } else {
+    // Hack for now.
+    setLastUpdate(context, time.Now().Unix()) 
   }
 }
+
+type Query struct {
+  Terms string `json:"terms"`
+}
+
+func searchIndex(w http.ResponseWriter, r *http.Request) {
+  context := appengine.NewContext(r)
+
+  // Open document index.
+  index, err := search.Open(ImageIndex)
+  if err != nil {
+    context.Errorf("%s", err.Error())
+    // fmt.Fprintf(w, "error: %s", err.Error())
+    return
+  }
+
+  // Get search terms.
+  decoder := json.NewDecoder(r.Body)
+  query := &Query{}
+  if err := decoder.Decode(query); err != nil {
+    context.Errorf("%s", err.Error())
+    // fmt.Fprintf(w, "error: %s", err.Error())
+    return
+  }
+  defer r.Body.Close()
+
+  //fmt.Fprintf(w, "%s", query.Terms)
+
+
+  // Execute the query using the terms from the request and saves the images
+  images := make([]*ImageDoc, 0, 50)
+  for t := index.Search(context, query.Terms, nil); ; {
+    doc := &ImageDoc{}
+    _, err := t.Next(doc)
+    if err == search.Done {
+      break
+    }
+    if err != nil {
+      break
+    }
+    images = append(images, doc)
+    // fmt.Fprintf(w, "Image: %s, URL: %s<br>", id, doc.URL)
+  }
+
+  // Encode images into json and send them out.
+  encoder := json.NewEncoder(w)
+  if err := encoder.Encode(images); err != nil {
+    context.Errorf("%s", err.Error())
+  }
+}
+
+////
+// Firebase funcs
+////
+const (
+  // Firebase URLs
+  FirebaseURL string = "https://charitysandbox.firebaseio.com"
+  ItemsPath   string = "/items.json"  // GET
+  UpdatePath  string = "/settings/update.json" // PUT
+
+  // AppEngine constants
+  ImageIndex string = "ImageIndex"
+)
 
 func getLatestImages(context appengine.Context) (images []*Image) {
   updated := getLastUpdated(context)
@@ -169,7 +225,7 @@ func getLatestImages(context appengine.Context) (images []*Image) {
 
 func getLastUpdated(context appengine.Context) (int64) {
   client := urlfetch.Client(context)
-  resp, err := client.Get(FirebaseURL + ItemsPath)
+  resp, err := client.Get(FirebaseURL + UpdatePath)
   if err != nil {
     log.Print(err.Error())
     return 0
@@ -196,7 +252,7 @@ func setLastUpdate(context appengine.Context, updated int64) {
 
   updateURL, _ := url.Parse(FirebaseURL + UpdatePath)
   request := &http.Request{
-    Method: "Put",
+    Method: "PUT",
     URL: updateURL,
     Body: data,
   }
