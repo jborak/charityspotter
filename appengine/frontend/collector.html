@@ -13,6 +13,8 @@
     <script type="text/javascript">
 
 var myRef = new Firebase("https://charitysandbox.firebaseio.com");
+
+/*
 var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
   if (error) {
     // an error occurred while attempting login
@@ -25,15 +27,38 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
     console.log("not logged in");
   }
 });
+*/
 
+$( document ).ready(function() {
+
+$("#fblogin").click(function(){
+
+login();
+});
+});
+
+/*
     $(function(){
-        $("fblogin").click(function(){
+        $("#fblogin").click(function(){
             auth.login('facebook', {
                 rememberMe: true,
                 scope: 'email, user_likes'
             });
         });
     });
+*/
+
+function login(){
+myRef.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+$("#user").html('<img src="' + authData.facebook.profileImageURL + '">');
+  }
+});
+}
+
     </script>
 
 
@@ -72,6 +97,7 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
 </head>
 
 <body id="page-top">
+<div id="user"></div>
 
     <nav id="mainNav" class="navbar navbar-primary navbar-fixed-top">
         <div class="container-fluid">
@@ -110,8 +136,14 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
         <div>
             <h1>Collector</h1>
         </div>
+
+                        <ul>                                    
+                    <a href="#" id="fblogin" class="btn btn-collector btn-lg" style="margin: 50px"><i class="#"></i> <span class="network-name">Login</span></a>
+                    
+                </ul>
     </div>
 
+  <!--  <div class="container" style="margin: 100px"><a href="#" id="fblogin">FB Login</a></div>-->
 
     <div class="container">
         <div class="row">
@@ -178,7 +210,7 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
     </div>
 
 
-    <div class="container" style="margin: 100px"><a href="#" id="fblogin">FB Login</a></div>
+
 
 
 
