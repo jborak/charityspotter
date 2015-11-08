@@ -14,21 +14,6 @@
 
 var myRef = new Firebase("https://charitysandbox.firebaseio.com");
 
-/*
-var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
-  if (error) {
-    // an error occurred while attempting login
-    console.log(error);
-  } else if (user) {
-    // user authenticated with Firebase
-    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
-  } else {
-    // user is logged out
-    console.log("not logged in");
-  }
-});
-*/
-
 $( document ).ready(function() {
 
 $("#fblogin").click(function(){
@@ -36,17 +21,6 @@ $("#fblogin").click(function(){
 login();
 });
 });
-
-/*
-    $(function(){
-        $("#fblogin").click(function(){
-            auth.login('facebook', {
-                rememberMe: true,
-                scope: 'email, user_likes'
-            });
-        });
-    });
-*/
 
 function login(){
 myRef.authWithOAuthPopup("facebook", function(error, authData) {
@@ -98,7 +72,6 @@ $("#user").html('<img src="' + authData.facebook.profileImageURL + '">');
 
 <body id="page-top">
 <div id="user"></div>
-
     <nav id="mainNav" class="navbar navbar-primary navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -150,26 +123,33 @@ $("#user").html('<img src="' + authData.facebook.profileImageURL + '">');
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <hr class="light">
                 <br/>
-                <p id='explore-header'>Start collecting</p>
             </div>
-        </div>
-    </div>
-
-    <div class="container-new-col">
-        <div class="col-lg-11 new-collection-cont">
-        </br>
-            <p class="dashed"><a href="collections.html"></br>Create a new collection event</a></p>
-        </div>
-        <div class="col-lg-11 new-collection-cont">
-        </br>
-            <p class="solid" href="collections.html"><a href="collections.html"></br>Join a collection event</a></p>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
+            <div class="col-lg-6 split explore">
+                <ul>
+                    <a href="explore.html" class="btn btn-collector btn-lg" style="margin: 50px; opacity: 1.0"><i class="#"></i> <span class="network-name">Start a new collection event</span></a>
+                    
+                </ul>
+            </div>
+            <div class="col-lg-6 split search">
+                <ul>                                    
+                    <a href="search.html" class="btn btn-collector btn-lg" style="margin: 50px"><i class="#"></i> <span class="network-name">Join a collection event</span></a>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <hr class="light">
+                <br/>
                 <p id='explore-header'>...or browse the inventory</p>
                 <br/>
             </div>
