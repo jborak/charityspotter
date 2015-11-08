@@ -39,6 +39,11 @@ h6 {
     background: url(../img/header.jpg) no-repeat center center;
 }
 
+#explore-header {
+	color: #eb3812;
+	font-size: 2.4em;
+}
+
 .split {
     padding: 50px 10px 50px 10px;
     height: 450px;
