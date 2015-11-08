@@ -1,0 +1,6 @@
+cron:
+- description: Re-indexing task
+  url: /api/index/
+  schedule: every 1 minutes
+
+
