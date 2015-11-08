@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="css/creative.css" type="text/css">
     <link rel="stylesheet" href="css/search.css" type="text/css">
 
+    <script type="text/javascript" src="js/spotter.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -87,7 +89,7 @@
                     <a>Search for tags, objects or even specific IDs:</a>
                     <input type="text" class="form-control" id="search-bar" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                <button type="submit" class="btn btn-default" onclick="javascript:searchItems(event);"><span class="glyphicon glyphicon-search"></span></button>
             </form>
         </div>
 
@@ -97,13 +99,13 @@
 
             <div class="bs-docs-grid">
                 <!-- Search summary -->
-                <div class="row">
+                <div class="row" style="display:none;">
                     <p id='search-summary'>Results for: <a>Cool</a></p>
                     <p id='result-count'>Displaying 20 out of 35 items found</p>
                 </div>
 
                 <!-- Result grid -->
-                <div class="row">
+                <div id="results" class="row" >
                     <div class="col-md-3 result-box">
                         <div class='intra-box'>
                             <h4>Item 1</h4>
@@ -247,7 +249,7 @@
                 </div>
 
                 <!-- Display more -->
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="col-md-12" id="more"><p>Get more items</p></div>
                 </div>
 
