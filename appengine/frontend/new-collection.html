@@ -81,7 +81,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <hr class="light">
-                <br/><br/>
+                <br/>
+                <p id='explore-header'>Create a new collection event</p>
+                <br/>
             </div>
         </div>
     </div>
@@ -91,10 +93,29 @@
         <div class='search-container'>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <a>Search for tags, objects or even specific IDs:</a>
-                    <input type="text" class="form-control" id="search-bar" placeholder="Search">
+                    <a>Collection Event ID:</a>
+                    <input type="text" class="form-control" id="name-bar" placeholder="My-collection">
+                </br>
                 </div>
-                <button type="submit" class="btn btn-default" onclick="javascript:searchItems(event);"><span class="glyphicon glyphicon-search"></span></button>
+                <div class="form-group">
+                </br>
+                    <a>Collection location:</a>
+                    <input type="text" class="form-control" placeholder="Tatooine">
+                    <a>  Storage units:</a>
+                    <input type="text" class="form-control" placeholder="Alderaan">
+                </br>
+                </div>
+            </br>
+                <div class="form-group">
+                </br>
+                    <a>Invite other collectors:</a>
+                    <input type="text" class="form-control" placeholder="Mace Windu">
+                </br>
+                </div>
+                </br>
+                </br>
+
+                <button type="submit" class="btn btn-default" onclick="javascript:searchItems(event);">Create form   <span class="glyphicon glyphicon-plus"></span></button>
             </form>
         </div>
     </div>
@@ -102,6 +123,8 @@
                 
 
     <div class="container">
+    </br>
+    </br>
         <div class="row">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">

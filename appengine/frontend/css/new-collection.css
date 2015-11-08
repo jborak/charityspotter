@@ -31,6 +31,12 @@ h6 {
     font-weight: 400;
 }
 
+#explore-header {
+    color: #eb3812;
+    font-size: 2.4em;
+    text-align: left;
+}
+
 .new-col-header {
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 10px;
@@ -45,7 +51,7 @@ h6 {
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
-    height: 60px;
+    height: 225px;
     text-align: center;
     border-radius: 2px;
 }
@@ -61,5 +67,12 @@ form a {
     color: #787878;
     font-size: 1.1em;
 }
+
+#name-bar {
+    width: 500px;
+    margin-left: 2em;
+    margin-right: 1em;
+}
+
 
 
