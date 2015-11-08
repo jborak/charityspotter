@@ -2,6 +2,13 @@
 <html lang="en">
 
 <head>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 1. Include Firebase JS Client -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/js/simple-login/1.6.4/firebase-simple-login.js"></script>
+
+
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +31,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
+    <link href="css/explore-search.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,7 +44,7 @@
 
 <body id="page-top">
 
-    <nav id="mainNav" class="navbar navbar-primary navbar-fixed-top" >
+    <nav id="mainNav" class="navbar navbar-primary navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -69,65 +77,77 @@
         <!-- /.container-fluid -->
     </nav>
 
+    <div class="collecter-header">
+        <div>
+            <h1>People</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <hr class="light">
+                <br/><br/>
+            </div>
+        </div>
+    </div>
 
 
-
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 split explore">
+                <ul>
+                    <a href="explore.html" class="btn btn-collector btn-lg" style="margin: 50px; opacity: 1.0"><i class="#"></i> <span class="network-name">Explore</span></a>
                     
-                    <hr class="light">
-<br/><br/>
-                </div>
+                </ul>
+            </div>
+            <div class="col-lg-6 split search">
+                <ul>                                    
+                    <a href="search.html" class="btn btn-collector btn-lg" style="margin: 50px"><i class="#"></i> <span class="network-name">Search</span></a>
+                    
+                </ul>
             </div>
         </div>
-    </section>
-
-
-
-
-
-
-
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 text-center">
-                    <h2 class="section-heading">Stay In Touch!</h2>
-                    <hr class="primary">
-                </div>
-                
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4">
-                   <center> <ul class="list-inline">
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="index.html#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="index.html#services">How It Works</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Charity Spotter. All Rights Reserved</p></center>
-                </div>
-                 <div class="col-lg-4"></div>
+<div class="container" style="margin: 100px"><a href="#" id="fblogin">FB Login</a></div>
+        <!-- Text under buttons -->
+        <div class="row">
+            <div class="col-lg-6 subheader">
+                <p>Come explore our categories!</p>
+            </div>
+            <div class="col-lg-6 subheader">
+                <p>Specific needs: we might have them!</p>
             </div>
         </div>
+
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+               <center> <ul class="list-inline">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="index.html#about">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="index.html#services">How It Works</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small">Copyright &copy; Charity Spotter. All Rights Reserved</p></center>
             </div>
+             <div class="col-lg-4"></div>
         </div>
-    </section>
+    </div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
