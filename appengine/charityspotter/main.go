@@ -187,7 +187,7 @@ const (
 )
 
 func getLatestImages(context appengine.Context) (images []*Image) {
-  updated := getLastUpdated(context)
+  updated := getLastUpdated(context) + 1
 
   client := urlfetch.Client(context)
   resp, err := client.Get(fmt.Sprintf("%s%s?orderBy=\"created\"&startAt=%d&", FirebaseURL, ItemsPath, updated))

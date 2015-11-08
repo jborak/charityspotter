@@ -1,5 +1,7 @@
 package com.charityspotter.charityspot;
 
+import android.util.Log;
+
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
 import com.clarifai.api.RecognitionResult;
@@ -13,6 +15,7 @@ import java.util.List;
  */
 public class ImageTagger {
 
+    String TAG = "ImageTagger";
     private static final String APP_ID = "HPEW2NyFNo8vKK2zf3BRowpxs6HyCMJTcapAOEQq";
     private static final String APP_SECRET = "2WNH9BioxGSHWA_IkhjLwZyMO-Bi5po1qpLXSRPW";
 
@@ -23,6 +26,8 @@ public class ImageTagger {
     }
 
     public String[] getTag(File imgFile) {
+
+        Log.i(TAG, "Using file" + imgFile.getAbsolutePath());
         List<RecognitionResult> results = client.recognize(new RecognitionRequest(imgFile));
 
         int numTags = results.get(0).getTags().size();
