@@ -2,42 +2,6 @@
 <html lang="en">
 
 <head>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- 1. Include Firebase JS Client -->
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-    <script src="https://cdn.firebase.com/js/simple-login/1.6.4/firebase-simple-login.js"></script>
-
-
-
-    <script type="text/javascript">
-
-var myRef = new Firebase("https://charitysandbox.firebaseio.com");
-var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
-  if (error) {
-    // an error occurred while attempting login
-    console.log(error);
-  } else if (user) {
-    // user authenticated with Firebase
-    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
-  } else {
-    // user is logged out
-    consol.log("not logged in");
-  }
-});
-
-    $(function(){
-        $("fblogin").click(function(){
-            auth.login('facebook', {
-                rememberMe: true,
-                scope: 'email, user_likes'
-            });
-        });
-    });
-    </script>
-
-
-
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +9,7 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel='shortcut icon' href='img/hands.ico' type='image/x-icon'/ >
-    <title>Charity Spotter - Collector</title>
+    <title>Charity Spotter - Collections</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -60,7 +24,7 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/creative.css" type="text/css">
-    <link href="css/explore-search.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/explore.css" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,7 +37,7 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
 
 <body id="page-top">
 
-    <nav id="mainNav" class="navbar navbar-primary navbar-fixed-top">
+    <nav id="mainNav" class="navbar navbar-primary navbar-fixed-top" >
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -106,31 +70,11 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
         <!-- /.container-fluid -->
     </nav>
 
-    <div class="collecter-header">
+
+
+    <div class="explore-header">
         <div>
-            <h1>Collector</h1>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <hr class="light">
-                <br/>
-                <p id='explore-header'>Start collecting</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-new-col">
-        <div class="col-lg-11 new-collection-cont">
-        </br>
-            <p class="dashed"><a href="collections.html"></br>Create a new collection event</a></p>
-        </div>
-        <div class="col-lg-11 new-collection-cont">
-        </br>
-            <p class="solid" href="collections.html"><a href="collections.html"></br>Join a collection event</a></p>
+            <h1>Collections</h1>
         </div>
     </div>
 
@@ -138,42 +82,12 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <hr class="light">
-                <p id='explore-header'>...or browse the inventory</p>
-                <br/>
+                <br/><br/>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 split explore">
-                <ul>
-                    <a href="explore.html" class="btn btn-collector btn-lg" style="margin: 50px; opacity: 1.0"><i class="#"></i> <span class="network-name">Explore</span></a>
-                    
-                </ul>
-            </div>
-            <div class="col-lg-6 split search">
-                <ul>                                    
-                    <a href="search.html" class="btn btn-collector btn-lg" style="margin: 50px"><i class="#"></i> <span class="network-name">Search</span></a>
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Text under buttons -->
-    <div class="row">
-        <div class="col-lg-6 subheader">
-            <p>Come explore our categories!</p>
-        </div>
-        <div class="col-lg-6 subheader">
-            <p>Specific needs: we might have them!</p>
-        </div>
-    </div>
-
-
-    <div class="container" style="margin: 100px"><a href="#" id="fblogin">FB Login</a></div>
-
-
+                
 
     <div class="container">
         <div class="row">
@@ -201,6 +115,7 @@ var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
              <div class="col-lg-4"></div>
         </div>
     </div>
+
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
