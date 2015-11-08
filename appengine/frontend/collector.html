@@ -29,7 +29,7 @@ myRef.authWithOAuthPopup("facebook", function(error, authData) {
   } else {
     console.log("Authenticated successfully with payload:", authData);
 $("#user").html('<img src="' + authData.facebook.profileImageURL + '">');
-  }
+$( ".logging" ).replaceWith( "<a>Logout</a>" );}
 });
 }
 
@@ -106,15 +106,19 @@ $("#user").html('<img src="' + authData.facebook.profileImageURL + '">');
             <h1>Collector</h1>
         </div>
 
-                        <ul>                                    
+               <ul>     <div class= "logging">                               
                     <a href="#" id="fblogin" class="btn btn-collector btn-lg" style="margin: 50px"><i class="#"></i> <span class="network-name">Login</span></a>
-                    
+                    </div>
                 </ul>
-                <div id="user"></div>
+                <div class="row">
+                    <div class="col-lg-4 col-lg-offset-4 text-center">
+               
+           </div>
+           </div>
     </div>
 
   <!--  <div class="container" style="margin: 100px"><a href="#" id="fblogin">FB Login</a></div>-->
-
+<center><div id="user" style="padding: 20px"></div></center>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
