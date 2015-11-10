@@ -1,6 +1,6 @@
 # CharitySpotter
 
-**[CharitySpotter](www.charityspotter.com) is an open source tool devised to help charities with inventory and stored object location.**
+**[CharitySpotter](http://charityspotter.com) is an open source tool devised to help charities with inventory and stored object location.**
 
 CharitySpotter allows organizations to capture photos of their collections and automatically generate a searchable inventory.
 
@@ -15,7 +15,7 @@ CharitySpotter allows organizations to capture photos of their collections and a
 
 4. Batch CRON jobs create an index the new objects stored, making the donations collected searchable.
 
-5. Through the webpage (www.charityspotter.com) users and organizations can search for specific items, or browse through the different categories.
+5. Through the webpage (http://charityspotter.com) users and organizations can search for specific items, or browse through the different categories.
 
 ![alt text][see-snap-tag]
 
