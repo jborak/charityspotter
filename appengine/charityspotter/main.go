@@ -29,7 +29,7 @@ func init() {
 
 // Image stores information about images created.
 type Image struct {
-  ID      int      `json:"uid"`
+  ID      string   `json:"uid"`
   URL     string   `json:"url"`
   Created int64    `json:"created"`
   Tags    []string `json:"tags"`
@@ -170,6 +170,7 @@ func searchIndex(w http.ResponseWriter, r *http.Request) {
   encoder := json.NewEncoder(w)
   if err := encoder.Encode(images); err != nil {
     context.Errorf("%s", err.Error())
+    fmt.Fprintf(w, "%s", err.Error())
   }
 }
 
@@ -183,7 +184,7 @@ const (
   UpdatePath  string = "/settings/update.json" // PUT
 
   // AppEngine constants
-  ImageIndex string = "ImageIndex"
+  ImageIndex string = "ImageIndex2"
 )
 
 func getLatestImages(context appengine.Context) (images []*Image) {
